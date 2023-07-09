@@ -17,7 +17,9 @@ void    error_type(int error_code)
     else if (error_code == 7)
         printf("Error 7: Mutex initialization failed for write mutex");
     else if (error_code == 8)
-        printf("Error 8: Mutex initialization failed for meal mutex");    
+        printf("Error 8: Mutex initialization failed for meal mutex");
+    else if (error_code == 9)
+        printf("Error 9: Get time of day function failure");
     exit(-1);
 }
 
