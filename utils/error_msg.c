@@ -20,6 +20,8 @@ void    error_type(int error_code)
         printf("Error 8: Mutex initialization failed for meal mutex");
     else if (error_code == 9)
         printf("Error 9: Get time of day function failure");
+    else if (error_code == 10)
+        printf("Error 10: Thread creation error");
     exit(-1);
 }
 
