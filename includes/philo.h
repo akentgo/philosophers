@@ -14,7 +14,7 @@ typedef struct  s_philo //this structure contains the information of each indivi
     int times_philo_has_eaten;
     long long time_since_last_meal;
     pthread_t thread_id;
-    struct s_master master;
+    t_master master;
 }           t_philo;
 
 typedef struct  s_master
@@ -31,7 +31,6 @@ typedef struct  s_master
     pthread_mutex_t forks[250];
     pthread_mutex_t write;
     t_philo philos[250];
-
 }           t_master;
 
 /////////////ERROR_MSG.C////////////////////////////////
@@ -40,6 +39,8 @@ void        error_type(int error_code);
 int         timestamp(void);
 long long   time_difference(long long present, long long past);
 /////////////PHILO_EXECUTE.C////////////////////////////
-void    *philo_rutine(void);
+void    *philo_rutine(void *philo);
+/////////////PRINT.C////////////////////////////////////
+void    print_ph(t_master *master, int philo_id, char *to_print);
 
 #endif
