@@ -13,7 +13,7 @@ typedef struct  s_philo //this structure contains the information of each indivi
     int right_fork_id;
     int times_philo_has_eaten;
     long long time_since_last_meal;
-    pthread_t   thread_id;
+    struct s_master master;
 
 }   t_philo;
 
@@ -25,6 +25,7 @@ typedef struct  s_master
     int time_to_eat;
     int max_times_eat;
     int philo_has_died;
+    int all_philos_have_eaten;
     //long long first_timestamp; we will keep this commented for now
     pthread_mutex_t meal_mutex;
     pthread_mutex_t forks[250];
