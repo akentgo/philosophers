@@ -27,14 +27,14 @@ int main(int argc, char **argv)
 
     if (argc == 5)
     {
-        parser(ft_atoi(argv[0]), ft_atoi(argv[1]), ft_atoi(argv[2]), \
-                ft_atoi(argv[3]), -1);
+        parser(ft_atoi(argv[1]), ft_atoi(argv[2]), ft_atoi(argv[3]), \
+                ft_atoi(argv[4]), -1);
         
     }
     else if (argc == 6)
     {
-        parser(ft_atoi(argv[0]), ft_atoi(argv[1]), ft_atoi(argv[2]), \
-                ft_atoi(argv[3]), ft_atoi(argv[4]));
+        parser(ft_atoi(argv[1]), ft_atoi(argv[2]), ft_atoi(argv[3]), \
+                ft_atoi(argv[4]), ft_atoi(argv[5]));
     }
     else
         error_type(1);
