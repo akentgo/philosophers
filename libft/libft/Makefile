@@ -15,19 +15,21 @@ FLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 %.o: %.c
-	$(CC) $(FLAGS) -c $< -o $@
+	@ $(CC) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
+	@ ar rc $(NAME) $(OBJS)
+	@ echo libft compiled👍🏻
 
 clean :
-	rm -rf $(OBJS)
-	rm -rf $(BONUS_OBJS)
+	@ rm -rf $(OBJS)
+	@ rm -rf $(BONUS_OBJS)
+	@ echo Libft clean finished✅
 fclean : clean
-	rm -rf $(NAME)
+	@ rm -rf $(NAME)
 
 bonus: $(NAME) $(BONUS_OBJS)
-	ar rcs $(NAME) $(BONUS_OBJS)
+	@ ar rcs $(NAME) $(BONUS_OBJS)
 
 re: fclean all
 

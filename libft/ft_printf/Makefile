@@ -6,20 +6,19 @@ SRCS = srcs/ft_print_hex.c srcs/ft_print_chars.c srcs/ft_print_ptr.c srcs/ft_pri
 OBJS = $(SRCS:.c=.o)
 
 %.o: %.c
-	gcc -Wall -Wextra -Werror -I include/ -c $< -o $@
+	@ gcc -Wall -Wextra -Werror -I includes/ -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	make -C libft/ all
-	cp libft/libft.a $(NAME)
-	ar rcs $(NAME) $(OBJS)
+	@ ar rcs $(NAME) $(OBJS)
+	@ echo Ft_printf compiled👍🏻
 
 clean:
-	rm -f $(NAME)
+	@ rm -f $(NAME)
+	@ echo Ft_printf clean finished✅
 fclean: clean
-	rm -f $(NAME)
-	make -C libft/ clean
+	@ rm -f $(OBJS)
 
 re: fclean all
 .PHONY: all clean fclean re
