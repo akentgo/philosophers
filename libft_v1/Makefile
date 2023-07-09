@@ -1,4 +1,3 @@
-#This makefile compiles all three folders, libft, gnl and printf
 
 NAME = libft_full
 CC = gcc
