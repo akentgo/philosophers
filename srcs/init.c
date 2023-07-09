@@ -3,7 +3,7 @@
 //this file is for the functions that will initialize both structures
 
 /*
-    Here we initialize the values for each philosopher let me explain line 
+    Here we initialize the values for each philosopher let me explain line 24
     Why don't I just write down the right fork id as philo_ct? Because there would be a conflict between the first
     and last philosopher when it is time to grab the fork, say there are 6 philosophers, the first philo (id = 0)
     would take for 0 and (0 + 1) % 6 = 1 so on and so forth, what happens with philosopher 6?
