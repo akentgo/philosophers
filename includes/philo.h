@@ -26,7 +26,7 @@ typedef struct  s_master
     int max_times_eat;
     int philo_has_died;
     int all_philos_have_eaten;
-    //long long first_timestamp; we will keep this commented for now
+    long long first_timestamp;  //this variable stores the first time the program executes thus starting the philosophers timer
     pthread_mutex_t meal_mutex;
     pthread_mutex_t forks[250];
     pthread_mutex_t write;
