@@ -24,7 +24,7 @@ void    launch_philosophers(t_master *master)
         philo[philo_ct].time_since_last_meal = timestamp();
         philo_ct++;
     }
-    is_philo_dead();
+    check_philosopher_dead();
     free_philosopher(master);
 }
 

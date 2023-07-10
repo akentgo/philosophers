@@ -6,6 +6,8 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 
+struct s_master;
+
 typedef struct  s_philo //this structure contains the information of each individual philosopher, so each philosopher has all of this information inside
 {
     int philo_id;
@@ -14,7 +16,7 @@ typedef struct  s_philo //this structure contains the information of each indivi
     int times_philo_has_eaten;
     long long time_since_last_meal;
     pthread_t thread_id;
-    t_master master;
+    struct s_master master;
 }           t_philo;
 
 typedef struct  s_master
@@ -43,4 +45,5 @@ void    *philo_rutine(void *philo);
 /////////////PRINT.C////////////////////////////////////
 void    print_ph(t_master *master, int philo_id, char *to_print);
 
+void    free_philosopher(t_master *master);
 #endif
