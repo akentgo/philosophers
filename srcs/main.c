@@ -19,6 +19,8 @@ void parser(int n_philo, int t_die, int t_sleep, int t_eat, int max_eat)
         error_type(4);
     else if (t_eat <= 0)
         error_type(5);
+    else if (max_eat != -1 && max_eat < 0)
+        error_type(11);
 }
 
 int main(int argc, char **argv)

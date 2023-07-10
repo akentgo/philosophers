@@ -22,6 +22,8 @@ void    error_type(int error_code)
         printf("Error 9: Get time of day function failure");
     else if (error_code == 10)
         printf("Error 10: Thread creation error");
+    else if (error_code == 10)
+        printf("Error 11: Max number of times philos eat is smaller than 0");
     exit(-1);
 }
 

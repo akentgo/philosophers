@@ -4,7 +4,7 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <stdio.h>
-# include "../libft/libft.h"
+# include "../libft_v1/libft/libft.h"
 
 struct s_master;
 

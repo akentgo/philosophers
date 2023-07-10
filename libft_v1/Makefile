@@ -14,7 +14,7 @@ $(NAME): $(OBJS)
 	@ make -C libft/ all
 	@ make -C ft_printf/ all
 	@ ar rcs $(NAME) $(OBJS)
-	@ echo Libray compiled✅
+	@ echo Library compiled✅
 
 clean:
 	@ make -C libft/ clean
