@@ -4,7 +4,7 @@ void	philosopher_eats(t_philo *philos)
 {
 	t_master *master;
 
-	master = &(philos->master);
+	master = philos->master;
 	pthread_mutex_lock(&(master->forks[philos->left_fork_id]));
 	print_ph(master, philos->philo_id, "has taken left fork");
 	pthread_mutex_lock(&(master->forks[philos->right_fork_id]));
@@ -41,10 +41,10 @@ void	philosopher_sleep(t_master *master)
 
 int		check_philosopher_dead(t_philo *philos)
 {
-	if (philos->time_since_last_meal > philos->master.time_to_eat)
+	if (philos->time_since_last_meal > philos->master->time_to_eat)
 	{
-		print_ph(&(philos->master), philos->philo_id, "is dead");
-		philos->master.philo_has_died = 1;
+		print_ph(philos->master, philos->philo_id, "is dead");
+		philos->master->philo_has_died = 1;
 		return (1);
 	}
 	return (0);
@@ -57,8 +57,7 @@ void check_all_philos_have_eaten(t_master *master)
 	i = -1;
 	while (++i <= master->number_of_philosophers)
 	{
-		if (&(master)->philos[i].times_philo_has_eaten \
-			>= master->max_times_eat)
+		if (&(master)->philos[i].times_philo_has_eaten >= &(master)->max_times_eat)
 			master->all_philos_have_eaten = 1;
 	}
 }
@@ -69,7 +68,7 @@ void    *philo_rutine(void *philo)
 	t_philo		*philos;
 	
 	philos = philo;
-	master = &(philos->master);
+	master = philos->master;
 	if (philos->philo_id % 2 == 0)
 		usleep(15000);
 	while (!(master->philo_has_died))

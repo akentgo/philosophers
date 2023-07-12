@@ -68,7 +68,7 @@ void    initialize_master(t_master *master, char **argv, int max_eat)
         master->max_times_eat = -1;
 }
 
-int initialize_all(t_master *master, char **argv, int extra_arg)
+void initialize_all(t_master *master, char **argv, int extra_arg)
 {
     initialize_master(master, argv, extra_arg);
     initialize_mutexes(master);
