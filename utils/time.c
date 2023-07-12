@@ -13,15 +13,15 @@
     current system time, then since we want the miliseconds, we return the seconds / 1000
     plus the microseconds * 1000 (check time sistem if any doubts)
 */
-int timestamp(void)
+
+long long timestamp(void)
 {
     struct timeval time;
-    if (gettimeofday(&time, NULL) == -1)
-        error_type(9);
-    return ((time.tv_sec / 1000) + (time.tv_usec * 1000));
+    gettimeofday(&time, NULL);
+    return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 long long   time_difference(long long present, long long past)
 {
-    return (past - present);
+    return (present - past);
 }

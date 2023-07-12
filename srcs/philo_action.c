@@ -30,7 +30,7 @@ void	philosopher_sleep(t_master *master)
 {
 	long long time;
 	
-	time = (int)timestamp();
+	time = timestamp();
 	while (!master->philo_has_died)
 	{
 		if (time >= master->time_to_sleep)
@@ -67,7 +67,7 @@ void    *philo_rutine(void *philo)
 	t_master	*master;
 	t_philo		*philos;
 	
-	philos = philo;
+	philos = (t_philo *)philo;
 	master = philos->master;
 	if (philos->philo_id % 2 == 0)
 		usleep(15000);

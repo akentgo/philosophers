@@ -39,7 +39,7 @@ typedef struct s_master
 void    error_type(int error_code);
 
 /////////////TIME.C/////////////////////////////////////
-int         timestamp(void);
+long long	timestamp(void);
 long long   time_difference(long long present, long long past);
 
 /////////////PHILO_EXECUTE.C////////////////////////////
@@ -54,4 +54,8 @@ void    print_ph(t_master *master, int philo_id, char *to_print);
 /////////////PHILO_ACTION.C/////////////////////////////
 int		check_philosopher_dead(t_philo *philos);
 void    check_all_philos_have_eaten(t_master *master);
+
+//init.c//
+void initialize_all(t_master *master, char **argv, int extra_arg);
+
 #endif
