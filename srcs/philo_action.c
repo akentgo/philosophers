@@ -41,8 +41,6 @@ void	philosopher_sleep(t_master *master)
 
 int		check_philosopher_dead(t_philo *philos)
 {
-	long long time;
-
 	if (philos->time_since_last_meal > philos->master.time_to_eat)
 	{
 		print_ph(&(philos->master), philos->philo_id, "is dead");
@@ -85,4 +83,5 @@ void    *philo_rutine(void *philo)
 		if (!check_philosopher_dead(philos))
 			return ;
 	}
+	return ;
 }
