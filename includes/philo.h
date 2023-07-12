@@ -37,13 +37,18 @@ typedef struct s_master
 
 /////////////ERROR_MSG.C////////////////////////////////
 void        error_type(int error_code);
+
 /////////////TIME.C/////////////////////////////////////
 int         timestamp(void);
 long long   time_difference(long long present, long long past);
+
 /////////////PHILO_EXECUTE.C////////////////////////////
 void    *philo_rutine(void *philo);
+
 /////////////PRINT.C////////////////////////////////////
 void    print_ph(t_master *master, int philo_id, char *to_print);
 
+/////////////PHILO_EXECUTE.C////////////////////////////////////
+void    launch_philosophers(t_master *master);
 void    free_philosopher(t_master *master);
 #endif
