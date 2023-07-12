@@ -1,26 +1,28 @@
 NAME = philosophers
 CC = gcc
-SRCS_FILES = init.c main.c philo_action.c philo_execute.c
-UTILS_FILES = error_msg.c print.c time.c
-SRCS = $(addprefix srcs/, $(SRCS_FILES)) $(addprefix utils/, $(UTILS_FILES))
+SRCS_FILES = init.c main.c philo_action.c philo_execute.c error_msg.c
+UTILS_FILES = print.c time.c
+SRCS = $(addprefix srcs/, $(SRCS_FILES))
+UTILS = $(addprefix utils/, $(UTILS_FILES))
 STANDARD_FLAGS = -Wall -Wextra -Werror 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:.c=.o) $(UTILS:.c=.o)
+LIBFT_DIR = libft_full/libft
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@ make -C libft_v1/ all
-	@ $(CC) $(STANDARD_FLAGS) -o $(NAME) $(OBJS) -Llibft_full
+	@ make -C $(LIBFT_DIR)
+	@ $(CC) -o $(NAME) $(OBJS) -L$(LIBFT_DIR) -lft $(STANDARD_FLAGS)
 
-$(OBJS) : $(SRCS)
-	@ $(CC) $(STANDARD_FLAGS) -c $(SRCS) -Iincludes
+$(OBJS): %.o : %.c
+	@ $(CC) $(STANDARD_FLAGS) -c $< -o $@
 
 clean:
-	@ make -C libft_v1/ clean
-	@ rm -f $(NAME)
+	@ make -C libft_full/ clean
+	@ rm -f $(NAME) $(OBJS)
 
 fclean: clean
-	@ make -C libft_v1/ fclean
+	@ make -C libft_full/ fclean
 	@ rm -f $(NAME)
 
 re: fclean all

@@ -4,7 +4,7 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <stdio.h>
-# include "../libft_v1/libft/libft.h"
+# include "../libft_full/libft/libft.h"
 
 struct s_master;
 
@@ -36,7 +36,7 @@ typedef struct s_master
 }           t_master;
 
 /////////////ERROR_MSG.C////////////////////////////////
-void        error_type(int error_code);
+void    error_type(int error_code);
 
 /////////////TIME.C/////////////////////////////////////
 int         timestamp(void);
