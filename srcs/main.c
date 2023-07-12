@@ -31,13 +31,13 @@ int main(int argc, char **argv)
     {
         parser(ft_atoi(argv[1]), ft_atoi(argv[2]), ft_atoi(argv[3]), \
                 ft_atoi(argv[4]), -1);
-        launch_philosophers();
+        launch_philosophers(&master);
     }
     else if (argc == 6)
     {
         parser(ft_atoi(argv[1]), ft_atoi(argv[2]), ft_atoi(argv[3]), \
                 ft_atoi(argv[4]), ft_atoi(argv[5]));
-        launch_philosophers();
+        launch_philosophers(&master);
     }
     else
         error_type(1);

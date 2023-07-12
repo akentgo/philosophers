@@ -11,7 +11,7 @@ void	philosopher_eats(t_philo *philos)
 	print_ph(master, philos->philo_id, "has taken right fork");
 	pthread_mutex_lock(&(master->meal_mutex));
 	print_ph(master, philos->philo_id, "is eating");
-	philos->time_since_last_meal = timestamp;
+	philos->time_since_last_meal = timestamp();
 	if (master->max_times_eat != -1)
 		philos->times_philo_has_eaten++;
 	pthread_mutex_unlock(&(master->meal_mutex));
@@ -30,7 +30,7 @@ void	philosopher_sleep(t_master *master)
 {
 	long long time;
 	
-	time = timestamp();
+	time = (int)timestamp();
 	while (!master->philo_has_died)
 	{
 		if (time >= master->time_to_sleep)
@@ -76,12 +76,12 @@ void    *philo_rutine(void *philo)
 	{
 		philosopher_eats(philos);
 		if (master->all_philos_have_eaten)
-			return ;
+			break ;
 		print_ph(master, philos->philo_id, "is sleeping");
 		philosopher_sleep(master);
 		print_ph(master, philos->philo_id, "is thinking");
 		if (!check_philosopher_dead(philos))
-			return ;
+			break ;
 	}
-	return ;
+	return (NULL);
 }
