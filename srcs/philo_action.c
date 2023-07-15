@@ -71,6 +71,9 @@ void    *philo_rutine(void *philo)
 	master = philos->master;
 	if (philos->philo_id % 2 == 0)
 		usleep(15000);
+	printf("Time to eat-> %i\n", master->time_to_eat);
+	printf("Time since last meal-> %lli\n", philos->time_since_last_meal);
+	printf("Timestamp-> %lli\n", timestamp());
 	while (!(master->philo_has_died))
 	{
 		philosopher_eats(philos);
@@ -79,7 +82,7 @@ void    *philo_rutine(void *philo)
 		print_ph(master, philos->philo_id, "is sleeping");
 		philosopher_sleep(master);
 		print_ph(master, philos->philo_id, "is thinking");
-		if (!check_philosopher_dead(philos))
+		if (check_philosopher_dead(philos))
 			break ;
 	}
 	return (NULL);

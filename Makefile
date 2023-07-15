@@ -13,6 +13,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@ make -C $(LIBFT_DIR)
 	@ $(CC) -o $(NAME) $(OBJS) -L$(LIBFT_DIR) -lft $(STANDARD_FLAGS)
+	@ echo Philosophers Compiled🤓
 
 $(OBJS): %.o : %.c
 	@ $(CC) $(STANDARD_FLAGS) -c $< -o $@

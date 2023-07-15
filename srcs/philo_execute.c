@@ -19,7 +19,7 @@ void    launch_philosophers(t_master *master)
     while (philo_ct <= master->number_of_philosophers)
     {
         if (pthread_create(&(philo[philo_ct].thread_id), NULL, \
-                        philo_rutine, &philo))
+                        philo_rutine, philo))
             error_type(10);
         philo[philo_ct].time_since_last_meal = timestamp();
         philo_ct++;
