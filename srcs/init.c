@@ -12,20 +12,19 @@
 */
 void    initialize_philo(t_master *master)
 {
-    int id;
     int philo_ct;
 
-    philo_ct = master->number_of_philosophers + 1;
-    id = 0;
-    while (--philo_ct >= 0)
+    philo_ct = 0;
+    while (philo_ct <= master->number_of_philosophers)
     {
-        master->philos[philo_ct].philo_id = id;
-        master->philos[philo_ct].left_fork_id = id;
+        master->philos[philo_ct].philo_id = philo_ct;
+        master->philos[philo_ct].left_fork_id = philo_ct;
         master->philos[philo_ct].right_fork_id = (philo_ct + 1) % \
                 master->number_of_philosophers;
         master->philos[philo_ct].times_philo_has_eaten = 0;
         master->philos[philo_ct].time_since_last_meal = 0;
         master->philos[philo_ct].master = master;
+        philo_ct++;
     }
 }
 
@@ -38,16 +37,17 @@ void    initialize_mutexes(t_master *master)
 {
     int philo_ct;
 
-    philo_ct = master->number_of_philosophers + 1;
-    while (--philo_ct >= 0)
+    philo_ct = 0;
+    while (philo_ct < master->number_of_philosophers)
     {
-       if (pthread_mutex_init(&(master->forks[philo_ct]), NULL) != 0) //we are initializing a mutex for each fork and setting the attributes to the default
-            error_type(6);
+       if (pthread_mutex_init(&(master->forks[philo_ct]), NULL)) //we are initializing a mutex for each fork and setting the attributes to the default
+            return (error_type(6));
+        philo_ct++;
     }
-    if (pthread_mutex_init(&(master->write), NULL) != 0)
-        error_type(7);
-    if (pthread_mutex_init(&(master->meal_mutex), NULL) != 0)
-        error_type(8);
+    if (pthread_mutex_init(&(master->write), NULL))
+        return (error_type(7));
+    if (pthread_mutex_init(&(master->meal_mutex), NULL))
+        return (error_type(8));
 }
 
 

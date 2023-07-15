@@ -13,18 +13,18 @@ void    launch_philosophers(t_master *master)
     t_philo *philo;
     int     philo_ct;
 
-    philo_ct = 0;
+    philo_ct = -1;
     philo = master->philos;
     master->first_timestamp = timestamp();
-    while (philo_ct <= master->number_of_philosophers)
+    while (++philo_ct < master->number_of_philosophers)
     {
         if (pthread_create(&(philo[philo_ct].thread_id), NULL, \
-                        philo_rutine, philo))
-            error_type(10);
+                        philo_rutine, (&philo[philo_ct])))
+                return (error_type(10));
         philo[philo_ct].time_since_last_meal = timestamp();
-        philo_ct++;
     }
-    check_philosopher_dead(master->philos);
+    if (master->number_of_philosophers > 1)
+        check_philosopher_dead(master);
     free_philosopher(master);
 }
 
