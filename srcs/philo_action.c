@@ -36,7 +36,7 @@ void	philosopher_sleep(t_master *master, long long t)
 	time = timestamp();
 	while (!(master->philo_has_died))
 	{
-		if (time_difference(time, timestamp() >= t))
+		if (time_difference(timestamp(), time) >= t)
 			break ;
 		usleep(50);
 	}
@@ -52,9 +52,9 @@ void		check_philosopher_dead(t_master *master)
 		while (philo_ct < master->number_of_philosophers && !master->philo_has_died)
 		{
 			pthread_mutex_lock(&(master->meal_mutex));
-			if (time_difference(timestamp(), master->philos[philo_ct].time_since_last_meal) > master->philos[philo_ct].master->time_to_die)
+			if (time_difference(master->philos[philo_ct].time_since_last_meal, timestamp()) > master->time_to_die)
 			{
-				print_ph(master, master->philos[philo_ct].philo_id, "has died");
+				print_ph(master, philo_ct, "has died");
 				master->philo_has_died = 1;
 			}
 			pthread_mutex_unlock(&(master->meal_mutex));
@@ -89,7 +89,7 @@ void    *philo_rutine(void *philo)
 			if (master->all_philos_have_eaten)
 				break ;
 			print_ph(master, philos->philo_id, "is sleeping");
-			philosopher_sleep(master, timestamp());
+			philosopher_sleep(master, master->time_to_sleep);
 			print_ph(master, philos->philo_id, "is thinking");
 		}
 	}

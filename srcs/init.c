@@ -15,7 +15,7 @@ void    initialize_philo(t_master *master)
     int philo_ct;
 
     philo_ct = 0;
-    while (philo_ct <= master->number_of_philosophers)
+    while (++philo_ct <= master->number_of_philosophers)
     {
         master->philos[philo_ct].philo_id = philo_ct;
         master->philos[philo_ct].left_fork_id = philo_ct;
@@ -24,7 +24,6 @@ void    initialize_philo(t_master *master)
         master->philos[philo_ct].times_philo_has_eaten = 0;
         master->philos[philo_ct].time_since_last_meal = 0;
         master->philos[philo_ct].master = master;
-        philo_ct++;
     }
 }
 
