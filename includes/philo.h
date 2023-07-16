@@ -52,8 +52,9 @@ void    *philo_rutine(void *philo);
 void    print_ph(t_master *master, int philo_id, char *to_print);
 
 /////////////PHILO_ACTION.C/////////////////////////////
-int		check_philosopher_dead(t_philo *philos);
+void	check_philosopher_dead(t_master *master);
 void    check_all_philos_have_eaten(t_master *master);
+void	philosopher_sleep(t_master *master, long long t);
 
 //init.c//
 void initialize_all(t_master *master, char **argv, int extra_arg);
