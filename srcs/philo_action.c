@@ -11,7 +11,7 @@ void	philosopher_eats(t_philo *philos)
 	print_ph(master, philos->philo_id, "has taken right fork");
 	pthread_mutex_lock(&(master->meal_mutex));
 	print_ph(master, philos->philo_id, "is eating");
-	philos->time_since_last_meal = timestamp();
+	philos->t_l_m = timestamp();
 	pthread_mutex_unlock(&(master->meal_mutex));
 	philosopher_sleep(master, master->time_to_eat);
 	philos->times_philo_has_eaten++;
@@ -36,17 +36,17 @@ void	philosopher_sleep(t_master *master, long long t)
 
 void	check_philosopher_dead(t_master *m)
 {
-	int	philo_ct;
+	int	p_ct;
 
 	while (!(m->all_philos_have_eaten))
 	{
-		philo_ct = -1;
-		while (++philo_ct < m->number_of_philosophers && !m->philo_has_died)
+		p_ct = -1;
+		while (++p_ct < m->number_of_philos && !m->philo_has_died)
 		{
 			pthread_mutex_lock(&(m->meal_mutex));
-			if (time_difference(m->philos[philo_ct].time_since_last_meal, timestamp()) > m->time_to_die)
+			if (time_difference(m->philos[p_ct].t_l_m, timestamp()) > m->t_d)
 			{
-				print_ph(m, philo_ct, "has died");
+				print_ph(m, p_ct, "has died");
 				m->philo_has_died = 1;
 			}
 			pthread_mutex_unlock(&(m->meal_mutex));
@@ -54,11 +54,11 @@ void	check_philosopher_dead(t_master *m)
 		}
 		if (m->philo_has_died)
 			break ;
-		philo_ct = 0;
-		while (m->max_times_eat != -1 && philo_ct < m->number_of_philosophers \
-			&& m->philos[philo_ct].times_philo_has_eaten >= m->max_times_eat)
-			philo_ct++;
-		if (philo_ct == m->number_of_philosophers)
+		p_ct = 0;
+		while (m->m_t_e != -1 && p_ct < m->number_of_philos \
+			&& m->philos[p_ct].times_philo_has_eaten >= m->m_t_e)
+			p_ct++;
+		if (p_ct == m->number_of_philos)
 			m->all_philos_have_eaten = 1;
 	}
 }
@@ -67,7 +67,7 @@ void	one_philo(t_master *master)
 {
 	pthread_mutex_lock(&(master->forks[1]));
 	print_ph(master, 1, "has taken left fork");
-	while (master->philos[0].time_since_last_meal < master->time_to_eat)
+	while (master->philos[0].t_l_m < master->time_to_eat)
 		usleep(50);
 	pthread_mutex_unlock(&(master->forks[1]));
 	print_ph(master, 1, "has put down left fork");

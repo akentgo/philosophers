@@ -1,6 +1,6 @@
 #include "../includes/philo.h"
 
-long long	imestamp(void)
+long long	timestamp(void)
 {
 	struct timeval	time;
 

@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 		if (ft_atoi(argv[1]) < 1)
 			error_type(2);
 		parser(ft_atoi(argv[2]), ft_atoi(argv[3]), ft_atoi(argv[4]), \
-				ft_atoi(argv[5]));
+				-1);
 		initialize_all(&master, argv, -1);
 		launch_philosophers(&master);
 	}

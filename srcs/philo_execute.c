@@ -8,14 +8,14 @@ void	launch_philosophers(t_master *master)
 	philo_ct = -1;
 	philo = master->philos;
 	master->first_timestamp = timestamp();
-	while (++philo_ct < master->number_of_philosophers)
+	while (++philo_ct < master->number_of_philos)
 	{
 		if (pthread_create(&(philo[philo_ct].thread_id), NULL, \
 					philo_rutine, (&philo[philo_ct])))
 			return (error_type(10));
-		philo[philo_ct].time_since_last_meal = timestamp();
+		philo[philo_ct].t_l_m = timestamp();
 	}
-	if (master->number_of_philosophers > 1)
+	if (master->number_of_philos > 1)
 		check_philosopher_dead(master);
 	else
 		one_philo(master);
@@ -26,10 +26,10 @@ void	free_philosopher(t_master *master)
 {
 	int	philo_ct;
 
-	philo_ct = master->number_of_philosophers + 1;
+	philo_ct = master->number_of_philos + 1;
 	while (--philo_ct >= 0)
 		pthread_join(master->philos[philo_ct].thread_id, NULL);
-	while (philo_ct <= master->number_of_philosophers)
+	while (philo_ct <= master->number_of_philos)
 	{
 		pthread_mutex_destroy(&(master->forks[philo_ct]));
 		philo_ct++;

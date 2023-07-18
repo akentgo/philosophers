@@ -14,18 +14,18 @@ typedef struct s_philo
 	int				left_fork_id;
 	int				right_fork_id;
 	int				times_philo_has_eaten;
-	long long		time_since_last_meal;
+	long long		t_l_m;
 	pthread_t		thread_id;
 	struct s_master	*master;
 }	t_philo;
 
 typedef struct s_master
 {
-	int				number_of_philosophers;
-	int				time_to_die;
+	int				number_of_philos;
+	int				t_d;
 	int				time_to_sleep;
 	int				time_to_eat;
-	int				max_times_eat;
+	int				m_t_e;
 	int				philo_has_died;
 	int				all_philos_have_eaten;
 	long long		first_timestamp;

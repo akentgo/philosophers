@@ -20,7 +20,7 @@ $(OBJS): %.o : %.c
 
 clean:
 	@ make -C libft_full/ clean
-	@ rm -f $(NAME) $(OBJS)
+	@ rm -rf $(NAME) $(OBJS)
 
 fclean: clean
 	@ make -C libft_full/ fclean
