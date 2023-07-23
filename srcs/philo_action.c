@@ -6,7 +6,7 @@
 /*   By: akent-go <akent-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 17:18:05 by akent-go          #+#    #+#             */
-/*   Updated: 2023/07/18 17:18:06 by akent-go         ###   ########.fr       */
+/*   Updated: 2023/07/23 13:06:03 by akent-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ void	philosopher_eats(t_philo *philos)
 	philosopher_sleep(master, master->time_to_eat);
 	philos->times_philo_has_eaten++;
 	pthread_mutex_unlock(&(master->forks[philos->left_fork_id]));
-	print_ph(master, philos->philo_id, "has put down left fork");
 	pthread_mutex_unlock(&(master->forks[philos->right_fork_id]));
-	print_ph(master, philos->philo_id, "has put down right fork");
 }
 
 void	philosopher_sleep(t_master *master, long long t)
@@ -40,39 +38,24 @@ void	philosopher_sleep(t_master *master, long long t)
 	time = timestamp();
 	while (!(master->philo_has_died))
 	{
+		check_philosopher_dead(master, master->philos);
+		if (master->philo_has_died)
+			return ;
 		if (time_difference(timestamp(), time) >= t)
-			break ;
+			return ;
 		usleep(50);
 	}
 }
 
-void	check_philosopher_dead(t_master *m)
+void	check_philosopher_dead(t_master *m, t_philo *p)
 {
-	int	p_ct;
-
-	while (!(m->all_philos_have_eaten))
+	if (time_difference(timestamp(), p[p->philo_id].t_l_m) > m->t_d)
 	{
-		p_ct = -1;
-		while (++p_ct < m->number_of_philos && !m->philo_has_died)
-		{
-			pthread_mutex_lock(&(m->meal_mutex));
-			if (time_difference(m->philos[p_ct].t_l_m, timestamp()) > m->t_d)
-			{
-				print_ph(m, p_ct, "has died");
-				m->philo_has_died = 1;
-			}
-			pthread_mutex_unlock(&(m->meal_mutex));
-			usleep(100);
-		}
-		if (m->philo_has_died)
-			break ;
-		p_ct = 0;
-		while (m->m_t_e != -1 && p_ct < m->number_of_philos \
-			&& m->philos[p_ct].times_philo_has_eaten >= m->m_t_e)
-			p_ct++;
-		if (p_ct == m->number_of_philos)
-			m->all_philos_have_eaten = 1;
+		print_ph(m, p->philo_id, "has died");
+		m->philo_has_died = 1;
+		//return (1);
 	}
+	//return (0);
 }
 
 void	one_philo(t_master *master)
@@ -82,7 +65,6 @@ void	one_philo(t_master *master)
 	while (master->philos[0].t_l_m < master->time_to_eat)
 		usleep(50);
 	pthread_mutex_unlock(&(master->forks[1]));
-	print_ph(master, 1, "has put down left fork");
 	print_ph(master, 1, "has died");
 	free_philosopher(master);
 }
@@ -101,8 +83,12 @@ void	*philo_rutine(void *philo)
 		philosopher_eats(philos);
 		if (master->all_philos_have_eaten)
 			break ;
+		if (master->philo_has_died)
+			return (NULL);
 		print_ph(master, philos->philo_id, "is sleeping");
 		philosopher_sleep(master, master->time_to_sleep);
+		if (master->philo_has_died)
+			return (NULL);
 		print_ph(master, philos->philo_id, "is thinking");
 	}
 	return (NULL);

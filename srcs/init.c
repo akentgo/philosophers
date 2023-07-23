@@ -6,7 +6,7 @@
 /*   By: akent-go <akent-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 17:17:49 by akent-go          #+#    #+#             */
-/*   Updated: 2023/07/18 17:17:51 by akent-go         ###   ########.fr       */
+/*   Updated: 2023/07/23 13:07:52 by akent-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@ void	initialize_philo(t_master *master)
 	int	philo_ct;
 
 	philo_ct = 0;
-	while (++philo_ct <= master->number_of_philos)
+	while (philo_ct < master->number_of_philos)
 	{
-		master->philos[philo_ct].philo_id = philo_ct;
+		master->philos[philo_ct].philo_id = philo_ct + 1;
 		master->philos[philo_ct].left_fork_id = philo_ct;
 		master->philos[philo_ct].right_fork_id = (philo_ct + 1) % \
 				master->number_of_philos;
-		master->philos[philo_ct].times_philo_has_eaten = 0;
+		master->philos[philo_ct].times_philo_has_eaten = 1;
 		master->philos[philo_ct].t_l_m = 0;
 		master->philos[philo_ct].master = master;
+		philo_ct++;
 	}
 }
 

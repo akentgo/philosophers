@@ -6,7 +6,7 @@
 /*   By: akent-go <akent-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 17:18:37 by akent-go          #+#    #+#             */
-/*   Updated: 2023/07/18 17:18:37 by akent-go         ###   ########.fr       */
+/*   Updated: 2023/07/23 12:52:54 by akent-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		initialize_all(t_master *master, char **argv, int extra_arg);
 //PHILO_ACTION.C//
 void		*philo_rutine(void *philo);
 void		one_philo(t_master *master);
-void		check_philosopher_dead(t_master *master);
+void		check_philosopher_dead(t_master *m, t_philo *p);
 void		philosopher_sleep(t_master *master, long long t);
 //PHILO_EXECUTE.C//
 void		launch_philosophers(t_master *master);
