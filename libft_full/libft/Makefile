@@ -24,7 +24,7 @@ $(NAME): $(OBJS)
 clean :
 	@ rm -rf $(OBJS)
 	@ rm -rf $(BONUS_OBJS)
-	@ echo Libft clean finished✅
+	
 fclean : clean
 	@ rm -rf $(NAME)
 
