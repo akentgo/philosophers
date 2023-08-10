@@ -6,7 +6,7 @@
 /*   By: akent-go <akent-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 17:18:05 by akent-go          #+#    #+#             */
-/*   Updated: 2023/07/23 13:06:03 by akent-go         ###   ########.fr       */
+/*   Updated: 2023/08/10 17:13:19 by akent-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@ void	check_philosopher_dead(t_master *m, t_philo *p)
 	{
 		print_ph(m, p->philo_id, "has died");
 		m->philo_has_died = 1;
-		//return (1);
 	}
-	//return (0);
 }
 
 void	one_philo(t_master *master)
