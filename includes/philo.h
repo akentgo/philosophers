@@ -6,7 +6,7 @@
 /*   By: akent-go <akent-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 17:18:37 by akent-go          #+#    #+#             */
-/*   Updated: 2023/07/23 12:52:54 by akent-go         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:42:29 by akent-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void		philosopher_sleep(t_master *master, long long t);
 //PHILO_EXECUTE.C//
 void		launch_philosophers(t_master *master);
 void		free_philosopher(t_master *master);
+void		check_all_philos_have_eaten(t_master *master);
 //PRINT.C//
 void		print_ph(t_master *master, int philo_id, char *to_print);
 //TIME.C//

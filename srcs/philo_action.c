@@ -6,7 +6,7 @@
 /*   By: akent-go <akent-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 17:18:05 by akent-go          #+#    #+#             */
-/*   Updated: 2023/08/10 17:13:19 by akent-go         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:43:36 by akent-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	philosopher_eats(t_philo *philos)
 
 	master = philos->master;
 	pthread_mutex_lock(&(master->forks[philos->left_fork_id]));
-	print_ph(master, philos->philo_id, "has taken left fork");
+	print_ph(master, philos->philo_id, "has taken a fork");
 	pthread_mutex_lock(&(master->forks[philos->right_fork_id]));
-	print_ph(master, philos->philo_id, "has taken right fork");
+	print_ph(master, philos->philo_id, "has taken a fork");
 	pthread_mutex_lock(&(master->meal_mutex));
 	print_ph(master, philos->philo_id, "is eating");
 	philos->t_l_m = timestamp();
 	pthread_mutex_unlock(&(master->meal_mutex));
-	philosopher_sleep(master, master->time_to_eat);
 	philos->times_philo_has_eaten++;
+	philosopher_sleep(master, master->time_to_eat);
 	pthread_mutex_unlock(&(master->forks[philos->left_fork_id]));
 	pthread_mutex_unlock(&(master->forks[philos->right_fork_id]));
 }
@@ -54,15 +54,15 @@ void	check_philosopher_dead(t_master *m, t_philo *p)
 		print_ph(m, p->philo_id, "has died");
 		m->philo_has_died = 1;
 	}
+	check_all_philos_have_eaten(m);
 }
 
 void	one_philo(t_master *master)
 {
-	pthread_mutex_lock(&(master->forks[1]));
+	pthread_mutex_lock(&(master->forks[0]));
 	print_ph(master, 1, "has taken left fork");
-	while (master->philos[0].t_l_m < master->time_to_eat)
-		usleep(50);
-	pthread_mutex_unlock(&(master->forks[1]));
+	philosopher_sleep(master, master->time_to_eat);
+	pthread_mutex_unlock(&(master->forks[0]));
 	print_ph(master, 1, "has died");
 	free_philosopher(master);
 }
@@ -85,9 +85,13 @@ void	*philo_rutine(void *philo)
 			return (NULL);
 		print_ph(master, philos->philo_id, "is sleeping");
 		philosopher_sleep(master, master->time_to_sleep);
+		if (master->all_philos_have_eaten)
+			break ;
 		if (master->philo_has_died)
 			return (NULL);
 		print_ph(master, philos->philo_id, "is thinking");
+		if (master->all_philos_have_eaten)
+			break ;
 	}
 	return (NULL);
 }

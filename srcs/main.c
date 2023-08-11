@@ -6,11 +6,16 @@
 /*   By: akent-go <akent-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 17:17:58 by akent-go          #+#    #+#             */
-/*   Updated: 2023/07/18 17:17:59 by akent-go         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:43:04 by akent-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+void	ft_leaks(void)
+{
+	system("leaks -q philosophers");
+}
 
 void	parser(int t_die, int t_sleep, int t_eat, int max_eat)
 {
@@ -28,6 +33,7 @@ int	main(int argc, char **argv)
 {
 	t_master	master;
 
+	atexit(ft_leaks);
 	if (argc == 5)
 	{
 		if (ft_atoi(argv[1]) < 1)
