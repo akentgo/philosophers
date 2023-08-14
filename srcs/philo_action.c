@@ -6,7 +6,7 @@
 /*   By: akent-go <akent-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 17:18:05 by akent-go          #+#    #+#             */
-/*   Updated: 2023/08/11 18:43:36 by akent-go         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:11:53 by akent-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	one_philo(t_master *master)
 {
 	pthread_mutex_lock(&(master->forks[0]));
 	print_ph(master, 1, "has taken left fork");
-	philosopher_sleep(master, master->time_to_eat);
+	philosopher_sleep(master, master->t_d);
 	pthread_mutex_unlock(&(master->forks[0]));
 	print_ph(master, 1, "has died");
 	free_philosopher(master);
